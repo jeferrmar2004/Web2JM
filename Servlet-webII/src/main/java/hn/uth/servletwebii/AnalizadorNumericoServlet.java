@@ -13,13 +13,13 @@ public class AnalizadorNumericoServlet extends HttpServlet {
         res.setContentType("text/html; charset=UTF-8");
         PrintWriter out = res.getWriter();
 
-        //JM - Bariables
+        // JM - Variables
         String s1 = req.getParameter("numero1");
         String s2 = req.getParameter("numero2");
         String s3 = req.getParameter("numero3");
         String lista = req.getParameter("lista"); // opción 3: N números para la moda
 
-        //JM - Valores Repetido
+        // JM - Valor más repetido (moda)
         if (!esVacio(lista)) {
             try {
                 List<Integer> numeros = aListaEnteros(lista); // lanza IllegalArgumentException si hay tokens inválidos
@@ -33,7 +33,7 @@ public class AnalizadorNumericoServlet extends HttpServlet {
                 encabezado(out);
                 out.println("<div class='contenido'><div class='grid'>");
 
-                //JM - Respuesta repetidos
+                // JM - Respuesta repetidos
                 out.println("<div class='panel'>");
                 out.println("<h3>Resultado: Valor más repetido</h3>");
                 out.println("<table>");
@@ -68,7 +68,7 @@ public class AnalizadorNumericoServlet extends HttpServlet {
             }
         }
 
-        //JM - validar mayor y menor que
+        // JM - Mayor y menor de 3 enteros
         if (!esVacio(s1) && !esVacio(s2) && !esVacio(s3)) {
             try {
                 int n1 = Integer.parseInt(s1.trim());
@@ -113,11 +113,11 @@ public class AnalizadorNumericoServlet extends HttpServlet {
             }
         }
 
-        //JM - Por si queda alguna carilla varcia
+        // JM - Sin parámetros: mostrar formulario
         mostrarFormulario(out, req, null, false);
     }
 
-    // JM - imprimir pantalla
+    // =================== VISTAS ===================
 
     private void inicioDocumento(PrintWriter out, String titulo) {
         out.println("<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/>"
@@ -127,59 +127,135 @@ public class AnalizadorNumericoServlet extends HttpServlet {
                 + "*,*::before,*::after{box-sizing:border-box}"
                 + "body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh;"
                 + "display:flex;align-items:center;justify-content:center;"
-                + "background:radial-gradient(1200px 600px at 10% 10%,#22d3ee22,transparent),"
-                + "radial-gradient(1200px 600px at 90% 90%,#a78bfa22,transparent),"
-                + "linear-gradient(135deg,#0ea5e9,#7c3aed) fixed}"
-                + ".tarjeta{width:min(980px,95vw);background:#0b1020cc;backdrop-filter:blur(6px);"
-                + "border-radius:20px;box-shadow:0 25px 60px rgba(0,0,0,.35);overflow:hidden;color:#e5e7eb}"
-                + ".cabecera{padding:28px 32px;background:linear-gradient(90deg,#22d3ee,#3b82f6,#8b5cf6);color:white}"
+                + "transition:background .3s,color .3s}"
+                + "body.modo-dia{background:#e5e7eb;color:#111827;}"
+                + "body.modo-noche{background:#121212;color:#f5f5f5;}"
+                + ".tarjeta{width:min(980px,95vw);border-radius:16px;"
+                + "box-shadow:0 10px 25px rgba(0,0,0,.2);overflow:hidden;"
+                + "transition:background .3s,color .3s}"
+                + "body.modo-dia .tarjeta{background:#f8fafc;color:#1e293b;}"
+                + "body.modo-noche .tarjeta{background:#1e1e1e;color:#f5f5f5;}"
+                + ".cabecera{padding:24px 28px;display:flex;justify-content:space-between;align-items:center}"
+                + "body.modo-dia .cabecera{background:#3b82f6;color:#fff;}"
+                + "body.modo-noche .cabecera{background:#2a2a2a;color:#fff;}"
                 + ".titulo{margin:0;font-weight:800;letter-spacing:.3px;font-size:clamp(20px,3.2vw,28px)}"
-                + ".sub{margin:6px 0 0;font-weight:600;opacity:.95}"
+                + ".sub{margin:6px 0 0;font-weight:600;opacity:.9}"
                 + ".contenido{padding:26px 32px}"
-                + ".grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}"
-                + ".panel{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:22px}"
-                + ".panel h3{margin:0 0 12px;color:#93c5fd;font-weight:700}"
-                + "table{width:100%;border-collapse:collapse;border:1px solid #334155;overflow:hidden;border-radius:10px}"
-                + "th,td{padding:12px 14px;border-bottom:1px solid #334155;text-align:center}"
-                + "th{background:#1e293b;color:#f8fafc;font-weight:700}"
+                + ".grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}"
+                + ".panel{border-radius:14px;padding:22px;transition:background .3s,border .3s}"
+                + "body.modo-dia .panel{background:#ffffff;border:1px solid #d1d5db}"
+                + "body.modo-noche .panel{background:#2a2a2a;border:1px solid #3a3a3a}"
+                + ".panel h3{margin:0 0 12px;font-weight:700}"
+                + "body.modo-dia .panel h3{color:#2563eb}"
+                + "body.modo-noche .panel h3{color:#93c5fd}"
+                + "table{width:100%;border-collapse:collapse;border-radius:8px;overflow:hidden;margin-top:8px}"
+                + "th,td{padding:12px 14px;text-align:center}"
+                + "body.modo-dia th{background:#f1f5f9;color:#111827}"
+                + "body.modo-noche th{background:#333;color:#f9f9f9}"
+                + "body.modo-dia td{border-bottom:1px solid #e5e7eb}"
+                + "body.modo-noche td{border-bottom:1px solid #2e2e2e}"
                 + ".chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}"
-                + ".chip{background:#111827;border:1px dashed #374151;color:#cbd5e1;padding:6px 10px;border-radius:999px;font-size:12px}"
+                + "body.modo-dia .chip{background:#f3f4f6;border:1px solid #d1d5db;color:#374151}"
+                + "body.modo-noche .chip{background:#2f2f2f;border:1px solid #444;color:#d1d1d1}"
                 + ".acciones{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}"
-                + ".btn{appearance:none;border:0;border-radius:12px;padding:12px 18px;background:#3b82f6;color:#fff;font-weight:800;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}"
-                + ".btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(59,130,246,.35)}"
-                + ".btn.fantasma{background:transparent;border:1px solid #64748b;color:#e5e7eb}"
-                + "label{display:block;margin:12px 0 6px;color:#cbd5e1;font-weight:600}"
-                + "input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #475569;"
-                + "background:#0b1220;color:#e5e7eb;outline:none} "
-                + "input:focus,textarea:focus{border-color:#22d3ee;box-shadow:0 0 0 4px #22d3ee22}"
-                + ".error{background:#7f1d1d;border:1px solid #fecaca;color:#fee2e2;padding:10px 12px;border-radius:12px;margin-bottom:10px}"
-                + ".pista{color:#94a3b8;font-size:12px;margin-top:6px}"
-                + ".links{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}"
-                + ".link{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #64748b;color:#e5e7eb;text-decoration:none}"
+                + ".btn{appearance:none;border:0;border-radius:10px;padding:12px 18px;cursor:pointer;"
+                + "transition:.2s;text-decoration:none;display:inline-block;font-weight:700}"
+                + "body.modo-dia .btn{background:#2563eb;color:#fff}"
+                + "body.modo-dia .btn:hover{background:#1d4ed8}"
+                + "body.modo-noche .btn{background:#444;color:#fff}"
+                + "body.modo-noche .btn:hover{background:#666}"
+                + ".btn.fantasma{background:transparent;border:1px solid #9ca3af}"
+                + "label{display:block;margin:12px 0 6px;font-weight:600}"
+                + "body.modo-dia label{color:#374151}"
+                + "body.modo-noche label{color:#d1d1d1}"
+                + "input,textarea{width:100%;padding:12px 14px;border-radius:10px;outline:none;transition:.3s}"
+                + "body.modo-dia input,body.modo-dia textarea{border:1px solid #9ca3af;background:#f9fafb;color:#111827}"
+                + "body.modo-noche input,body.modo-noche textarea{border:1px solid #555;background:#111;color:#f5f5f5}"
+                + "input:focus,textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px #2563eb44}"
+                + ".error{padding:10px 12px;border-radius:10px;margin-bottom:10px;font-weight:600}"
+                + "body.modo-dia .error{background:#fee2e2;border:1px solid #fca5a5;color:#991b1b}"
+                + "body.modo-noche .error{background:#3f1d1d;border:1px solid #f87171;color:#fecaca}"
+                + ".pista{font-size:12px;margin-top:6px}"
+                + "body.modo-dia .pista{color:#6b7280}"
+                + "body.modo-noche .pista{color:#9ca3af}"
+                + ".link{display:inline-block;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}"
+                + "body.modo-dia .link{border:1px solid #9ca3af;color:#1e3a8a;background:#f3f4f6}"
+                + "body.modo-dia .link:hover{background:#e5e7eb}"
+                + "body.modo-noche .link{border:1px solid #555;color:#f5f5f5;background:#2a2a2a}"
+                + "body.modo-noche .link:hover{background:#3a3a3a}"
+
+                // === Switch Día/Noche estilo toggle ===
+                + ".modo-switch{position:absolute; top:16px; right:20px; z-index:1000}"
+                + ".switch{position:relative; width:66px; height:34px; border-radius:999px;"
+                + "  background:#f8fafc; border:2px solid #2563eb; display:flex; align-items:center;"
+                + "  padding:0 8px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.12)}"
+                + "body.modo-noche .switch{background:#1f1f1f; border-color:#5f84ff}"
+                + ".switch input{display:none}"
+                + ".switch .icon{font-size:16px; line-height:1; pointer-events:none;}"
+                + ".switch .icon.sun{color:#f59e0b; margin-left:auto}"
+                + ".switch .icon.moon{color:#c7d2fe; margin-right:auto}"
+                + ".switch .knob{position:absolute; top:5px; left:5px; width:22px; height:22px;"
+                + "  background:#2563eb; border-radius:50%; transition:transform .22s ease;}"
+                + "body.modo-noche .switch .knob{background:#5f84ff}"
+                + ".switch input:checked + .track .knob{transform:translateX(32px)}"
+                + ".switch .track{position:relative; width:100%; height:100%; display:flex; align-items:center;}"
                 + "</style>"
+
                 + "<script>"
+                // Validaciones existentes
                 + "function msjRequerido(e,msj){e.target.setCustomValidity('');if(!e.target.validity.valid){e.target.setCustomValidity(msj);} }"
                 + "function limpiarMensaje(e){e.target.setCustomValidity('');}"
-                + "// Validación cliente para la lista (moda)"
-                + "function validarListaModa(){"
-                + "  var t = document.getElementById('lista');"
-                + "  if(!t){return true;}"
-                + "  var raw = (t.value||'').trim();"
-                + "  if(raw===''){ t.setCustomValidity('Escribe uno o más números enteros.'); t.reportValidity(); return false; }"
-                + "  var tokens = raw.split(/[,\\s]+/).filter(Boolean);"
-                + "  var malos=[];"
-                + "  for(var i=0;i<tokens.length;i++){ if(!/^[-]?\\d+$/.test(tokens[i])) malos.push(tokens[i]); }"
-                + "  if(malos.length>0){ t.setCustomValidity('No válido: ' + malos.join(', ')); t.reportValidity(); return false; }"
-                + "  t.setCustomValidity(''); return true;"
-                + "}"
+                + "function validarListaModa(){var t=document.getElementById('lista');if(!t){return true;}var raw=(t.value||'').trim();"
+                + "if(raw===''){t.setCustomValidity('Escribe uno o más números enteros.');t.reportValidity();return false;}"
+                + "var tokens=raw.split(/[,\\s]+/).filter(Boolean);var malos=[];"
+                + "for(var i=0;i<tokens.length;i++){if(!/^[-]?\\d+$/.test(tokens[i])) malos.push(tokens[i]);}"
+                + "if(malos.length>0){t.setCustomValidity('No válido: '+malos.join(', '));t.reportValidity();return false;}"
+                + "t.setCustomValidity('');return true;}"
+
+                // Switch Día/Noche con localStorage
+                + "(function(){"
+                + "  var chk;"
+                + "  function aplicarModo(m){"
+                + "    document.body.classList.remove('modo-dia','modo-noche');"
+                + "    document.body.classList.add(m==='noche'?'modo-noche':'modo-dia');"
+                + "    if(chk){ chk.checked=(m==='noche'); }"
+                + "  }"
+                + "  function alternar(){"
+                + "    var m=chk && chk.checked ? 'noche' : 'dia';"
+                + "    localStorage.setItem('modo', m);"
+                + "    aplicarModo(m);"
+                + "  }"
+                + "  document.addEventListener('DOMContentLoaded',function(){"
+                + "    chk=document.getElementById('chk-modo');"
+                + "    var m=localStorage.getItem('modo')||'dia';"
+                + "    aplicarModo(m);"
+                + "    if(chk){ chk.addEventListener('change', alternar); }"
+                + "  });"
+                + "})();"
                 + "</script>"
                 + "</head><body><div class='tarjeta'>");
     }
 
     private void encabezado(PrintWriter out) {
-        out.println("<div class='cabecera'>");
+        out.println("<div class='cabecera' style='position:relative;'>");
+        out.println("<div>");
         out.println("<h1 class='titulo'>Analizador numérico <span style='font-size:14px;font-weight:700;opacity:.95'>&mdash; Mayor/Menor y Moda</span></h1>");
         out.println("<p class='sub'>Jeferson Mauricio Martinez Ramos — Cuenta: 202310010648</p>");
+        out.println("<p class='sub'>Kensy Rosio Rodriguez — Cuenta: 202120120079</p>");
+        out.println("</div>");
+
+        // Switch Día/Noche
+        out.println("<div class='modo-switch'>"
+                + "  <label class='switch'>"
+                + "    <input id='chk-modo' type='checkbox' aria-label='Cambiar modo'>"
+                + "    <div class='track'>"
+                + "      <span class='icon moon'>🌙</span>"
+                + "      <span class='icon sun'>☀️</span>"
+                + "      <div class='knob'></div>"
+                + "    </div>"
+                + "  </label>"
+                + "</div>");
+
         out.println("</div>");
     }
 
@@ -187,13 +263,14 @@ public class AnalizadorNumericoServlet extends HttpServlet {
         out.println("</div></body></html>");
     }
 
-    //JM -  Formulario completo
+    // =================== FORMULARIO ===================
+
     private void mostrarFormulario(PrintWriter out, HttpServletRequest req, String mensajeError, boolean enfocarModa) {
         inicioDocumento(out, "Analizador numérico — Formulario");
         encabezado(out);
         out.println("<div class='contenido'><div class='grid'>");
 
-        //JM -  Mayor/Menor
+        // JM - Mayor/Menor
         out.println("<div class='panel'>");
         out.println("<h3>Mayor y menor de 3 enteros</h3>");
         if (mensajeError != null && !enfocarModa) out.println("<div class='error'>" + mensajeError + "</div>");
@@ -211,7 +288,7 @@ public class AnalizadorNumericoServlet extends HttpServlet {
         out.println("</form>");
         out.println("</div>");
 
-        //JM - repetidos
+        // JM - Moda
         out.println("<div class='panel'>");
         out.println("<h3>Valor más repetido (N enteros)</h3>");
         if (mensajeError != null && enfocarModa) out.println("<div class='error'>" + mensajeError + "</div>");
@@ -231,7 +308,8 @@ public class AnalizadorNumericoServlet extends HttpServlet {
         finDocumento(out);
     }
 
-    //JM - calculos
+    // =================== LÓGICA ===================
+
     private static boolean esVacio(String s) { return s == null || s.trim().isEmpty(); }
 
     private String vistaOrdenada(int a, int b, int c) {
@@ -249,8 +327,7 @@ public class AnalizadorNumericoServlet extends HttpServlet {
 
         for (String p : partes) {
             if (p.isEmpty()) continue;
-            if (p.matches("-?\\d+")) {
-                // es entero (permite negativos)
+            if (p.matches("-?\\d+")) { // permite negativos
                 lista.add(Integer.parseInt(p));
             } else {
                 invalidos.add(p);
@@ -258,7 +335,6 @@ public class AnalizadorNumericoServlet extends HttpServlet {
         }
 
         if (!invalidos.isEmpty()) {
-            // mensaje detallado para el usuario
             throw new IllegalArgumentException("Los siguientes valores no son enteros válidos: " + String.join(", ", invalidos));
         }
         return lista;
@@ -289,7 +365,7 @@ public class AnalizadorNumericoServlet extends HttpServlet {
         return sb.toString();
     }
 
-    //JM - Respuestas repetidos
+    // DTO simple para moda
     private static class ResultadoModa {
         final int vecesMax;
         final List<Integer> modas;
