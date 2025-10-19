@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>hn.uth</groupId>
-    <artifactId>ATMGrup4</artifactId>
+    <groupId>HN.UTH</groupId>
+    <artifactId>UTH-ATM-GRUPO4</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>ATMGrup4</name>
+    <name>UTH-ATM-GRUPO4</name>
     <packaging>war</packaging>
 
     <properties>
@@ -42,20 +42,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- API Servlet (la provee Tomcat en runtime) -->
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- JSTL para <c:url> y otras etiquetas -->
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-            <version>3.0.1</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -64,9 +50,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
             </plugin>
         </plugins>
     </build>
