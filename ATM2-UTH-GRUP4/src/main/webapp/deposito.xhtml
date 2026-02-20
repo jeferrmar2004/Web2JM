@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>ATM - DEPÓSITO</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/estilos/atm.css" />
+    <script type="text/javascript" src="#{request.contextPath}/estilos/atm.js"></script>
+</h:head>
+
+<h:body>
+    <div class="atm-screen-frame">
+
+        <div class="side-buttons-left">
+
+            <h:commandButton value=">Ayuda"
+                             onclick="navigateAtm('help'); return false;"
+                             styleClass="side-btn"/>
+
+            <h:commandButton value=">Menú"
+                             onclick="navigateAtm('index'); return false;"
+                             styleClass="side-btn"/>
+
+            <h:commandButton value=">Salir"
+                             onclick="navigateAtm('index'); return false;"
+                             styleClass="side-btn"/>
+        </div>
+
+        <div class="atm-container">
+            <h1>DEPÓSITO</h1>
+            <p>Ingrese la cuenta de destino y el monto a depositar.</p>
+
+            <h:form id="depositoForm">
+
+                <h:messages globalOnly="true" style="color: red; list-style: none; padding: 0;" />
+                <h:outputText value="#{transaccionBean.mensaje}" styleClass="message-area"
+                              rendered="#{not empty transaccionBean.mensaje}"/>
+
+                <h:outputLabel for="cuentaDestino" value="Cuenta de destino"/>
+                <h:inputText id="cuentaDestino" value="#{transaccionBean.numeroCuenta}"
+                             required="true" styleClass="input-field" />
+                <h:message for="cuentaDestino" style="color: red; display: block; font-size: 0.9em;" />
+
+                <h:outputLabel for="monto" value="Monto a depositar (L)"/>
+                <h:inputText id="monto" value="#{transaccionBean.monto}"
+                             required="true" styleClass="input-field">
+                    <f:convertNumber pattern="0.00"/>
+                </h:inputText>
+                <h:message for="monto" style="color: red; display: block; font-size: 0.9em;" />
+
+                <div class="button-group">
+                    <h:commandButton value="Confirmar" action="#{transaccionBean.procesarDeposito}" styleClass="btn btn-primary"/>
+
+                    <h:commandButton value="Cancelar" onclick="navigateAtm('menu'); return false;" styleClass="btn btn-secondary"/>
+                </div>
+
+            </h:form>
+        </div>
+
+        <div class="side-buttons-right">
+
+            <h:commandButton value="Retirar>"
+                             onclick="navigateAtm('retirar'); return false;"
+                             styleClass="side-btn"/>
+
+            <h:commandButton value="Depósito>"
+                             onclick="navigateAtm('deposito'); return false;"
+                             styleClass="side-btn"/>
+        </div>
+
+    </div>
+</h:body>
+</html>

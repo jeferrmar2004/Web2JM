@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets"
+      lang="es">
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Ayuda • Cajero UTH</title>
+    <link rel="stylesheet" href="#{request.contextPath}/estilos/atm.css" />
+</h:head>
+
+<h:body>
+    <main class="contenedor">
+        <section class="atm-bisel">
+            <div class="atm-panel">
+
+                <!-- SOFT KEYS IZQUIERDA -->
+                <aside class="softcol">
+                    <h:link outcome="/WEB-INF/index.xhtml" value="Menú ›" styleClass="softkey"/>
+                    <h:link outcome="/WEB-INF/deposit.xhtml" value="Depósito ›" styleClass="softkey"/>
+                    <h:link outcome="/WEB-INF/retirar.xhtml" value="Retiro ›" styleClass="softkey"/>
+                    <h:commandButton value="Salir ›" styleClass="softkey" action="#{loginBean.logout}"/>
+                </aside>
+
+                <!-- PANTALLA CENTRAL -->
+                <section class="pantalla">
+                    <h2 class="lcd-titulo">AYUDA Y CONTACTO</h2>
+                    <p class="lcd-sub">Información del proyecto y soporte técnico.</p>
+
+                    <div class="tarjeta">
+                        <p><b>Proyecto:</b> Cajero Automático Simulado</p>
+                        <p><b>Asignatura:</b> Programación Web 2</p>
+                        <p><b>Universidad:</b> Tecnológica de Honduras (UTH)</p>
+                        <p><b>Docente:</b> Joseph Cooper</p>
+                        <p><b>Grupo:</b> ATMGrup4</p>
+
+                        <p style="margin-top:10px;"><b>Integrantes:</b></p>
+                        <ul style="margin-left:20px;">
+                            <li>Jeferson Mauricio Martinez Ramos - 202310010648</li>
+                            <li>Edwin Rene Torres Hernandez - 991051087</li>
+                            <li>Axel David Rubio Vega - 202210050019</li>
+                            <li>Bruno Alexander Cruz Perdomo - 202330010342</li>
+                            <li>Ledin Noe Mendez Reyes - 202310060827</li>
+                            <li>Kensy Rosio Rodriguez - 202120120079</li>
+                        </ul>
+                    </div>
+
+                    <div class="tarjeta mt-4">
+                        <h4 style="margin:0 0 8px;">Centro de Soporte</h4>
+                        <p>Si experimenta errores o desea sugerir mejoras, contacte al equipo técnico UTH:</p>
+                        <p><b>Email:</b> soporte@uth.hn</p>
+                        <p><b>Teléfono:</b> +504 2550-9000</p>
+                        <p><b>Horario:</b> Lunes a Viernes, 8:00 a.m. – 5:00 p.m.</p>
+                    </div>
+                </section>
+
+                <!-- SOFT KEYS DERECHA -->
+                <aside class="softcol">
+                    <h:link outcome="/WEB-INF/deposit.xhtml" value="Depósito ‹" styleClass="softkey"/>
+                    <h:link outcome="/WEB-INF/retirar.xhtml" value="Retiro ‹" styleClass="softkey"/>
+                    <h:link outcome="/WEB-INF/index.xhtml" value="Menú ‹" styleClass="softkey"/>
+                    <h:commandButton value="Salir ‹" styleClass="softkey" action="#{loginBean.logout}"/>
+                </aside>
+            </div>
+
+            <div class="ranura"></div>
+        </section>
+    </main>
+
+    <script src="#{request.contextPath}/estilos/atm.js"></script>
+</h:body>
+</html>

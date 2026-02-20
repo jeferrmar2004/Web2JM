@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      lang="es">
+
+<h:head>
+    <meta charset="UTF-8"/>
+    <title>ATM • Inicio de Sesión</title>
+    <link rel="stylesheet" href="#{request.contextPath}/estilos/atm.css"/>
+    <style>.encabezado{display:none;}</style>
+</h:head>
+
+<h:body>
+    <main class="contenedor">
+        <section class="atm-bisel">
+            <div class="atm-panel">
+                <!-- Soft keys izquierda -->
+                <aside class="softcol">
+                    <h:commandButton value="› Ayuda" styleClass="softkey"/>
+                    <h:commandButton value="› Soporte" styleClass="softkey"/>
+                    <h:commandButton value="› Salir" styleClass="softkey"/>
+                </aside>
+
+                <!-- Pantalla -->
+                <section class="pantalla">
+                    <h2 class="lcd-titulo">BIENVENIDO</h2>
+                    <p class="lcd-sub">Ingrese su número de cuenta y su PIN.</p>
+
+                    <h:form styleClass="formulario">
+                        <div class="campo">
+                            <h:outputLabel for="cuenta" value="Número de cuenta"/>
+                            <h:inputSecret id="cuenta" maxlength="6" styleClass="entrada"/>
+                        </div>
+
+                        <div class="campo">
+                            <h:outputLabel for="pin" value="PIN"/>
+                            <h:inputSecret id="pin" maxlength="6" styleClass="entrada"/>
+                            <span class="ayuda">Por seguridad, los valores no se mostrarán.</span>
+                        </div>
+
+                        <div class="fila-botones">
+                            <h:commandButton value="Ingresar" styleClass="boton"/>
+                            <h:commandButton value="Cancelar" styleClass="boton claro"/>
+                        </div>
+
+                        <div class="alerta info mt-3">
+                            Ingrese sus datos para acceder al sistema.
+                        </div>
+                    </h:form>
+                </section>
+
+                <!-- Soft keys derecha -->
+                <aside class="softcol">
+                    <h:commandButton value="Depósito ‹" styleClass="softkey"/>
+                    <h:commandButton value="Retiro ‹" styleClass="softkey"/>
+                    <h:commandButton value="Consulta ‹" styleClass="softkey"/>
+                </aside>
+            </div>
+            <div class="ranura"></div>
+        </section>
+    </main>
+</h:body>
+</html>

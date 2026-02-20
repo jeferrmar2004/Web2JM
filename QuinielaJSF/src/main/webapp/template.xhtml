@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title><ui:insert name="title">Quiniela JSF</ui:insert></title>
+    <style>
+        /* Estilo para el cuerpo de la página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Contenedor del menú de navegación */
+        .nav-menu {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        /* Estilo para los enlaces del menú */
+        .nav-menu a {
+            display: inline-block;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        /* Cambio de color al pasar el mouse sobre los enlaces */
+        .nav-menu a:hover {
+            background-color: #575757;
+        }
+
+        /* Estilo para el contenido principal de la página */
+        .content {
+            padding: 20px;
+        }
+        /* Estilos para los encabezados */
+        h2 {
+            color: #343a40;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        /* Estilos para el formulario */
+        form {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        form table { /* Apunta al h:panelGrid */
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px; /* Espacio vertical entre filas del formulario */
+        }
+
+        form label { /* Apunta al h:outputLabel */
+            font-weight: 600;
+            padding-right: 15px;
+            color: #495057;
+        }
+
+        form input[type="text"] { /* Apunta al h:inputText */
+            width: calc(100% - 22px); /* Ajuste para padding y borde */
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        form input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        form input[type="submit"] { /* Apunta al h:commandButton */
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilo para los mensajes de error */
+        form .ui-message-error { /* Clase estándar de JSF para mensajes de error */
+            font-size: 0.9em;
+            padding-left: 5px;
+        }
+
+        /* Estilos para la tabla de partidos */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden; /* Para que los bordes redondeados se apliquen a la tabla */
+        }
+
+        .table-header {
+            background-color: #343a40;
+            color: white;
+            font-weight: 600;
+        }
+
+        .table .table-header th {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table-odd-row td, .table-even-row td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .table-odd-row {
+            background-color: #f8f9fa;
+        }
+
+        .table-even-row {
+            background-color: #ffffff;
+        }
+
+        .table tr:hover td {
+            background-color: #e9ecef;
+        }
+
+        /* Mensaje para cuando no hay partidos */
+        .no-partidos {
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        /* Separador */
+        hr {
+            border: 0;
+            height: 1px;
+            background: #dee2e6;
+        }
+
+    </style>
+</h:head>
+
+<h:body>
+    <div class="nav-menu">
+        <h:link outcome="/index.xhtml" value="Resultados"/>
+        <h:link outcome="/partidos.xhtml" value="Partidos"/>
+        <h:link outcome="/posiciones.xhtml" value="Posiciones"/>
+    </div>
+
+    <div class="content">
+        <ui:insert name="content">
+            <!-- El contenido de cada página se insertará aquí -->
+        </ui:insert>
+    </div>
+</h:body>
+</html>

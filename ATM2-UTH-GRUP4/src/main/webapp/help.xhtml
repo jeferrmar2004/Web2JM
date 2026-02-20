@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>ATM - AYUDA Y CONTACTO</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/estilos/atm.css" />
+    <script type="text/javascript" src="#{request.contextPath}/estilos/atm.js"></script>
+</h:head>
+
+<h:body>
+    <div class="atm-screen-frame">
+
+        <div class="side-buttons-left">
+            <h:commandButton value=">Regresar"
+                             onclick="navigateAtm('index'); return false;"
+                             styleClass="side-btn"/>
+        </div>
+
+        <div class="atm-container">
+            <h1>AYUDA Y CONTACTO</h1>
+            <p>Información del proyecto y soporte técnico.</p>
+
+            <div class="info-section">
+                <p><strong>Proyecto:</strong> Cajero Automático Simulado</p>
+                <p><strong>Asignatura:</strong> Programación Web 2</p>
+                <p><strong>Universidad:</strong> Universidad Tecnológica de Honduras (UTH)</p>
+                <p><strong>Docente:</strong> Joseph Cooper</p>
+                <p><strong>Grupo:</strong> ATM Grup4</p>
+            </div>
+
+            <div class="info-section">
+                <h2>Integrantes:</h2>
+                <ol>
+                    <li>Jeferson Mauricio Martinez Ramos - 202310010648</li>
+                    <li>Edwin Rene Torres Hernandez - 991051087</li>
+                    <li>Axel David Rubio Vega - 202210050019</li>
+                    <li>Bruno Alexander Cruz Perdomo - 202330010342</li>
+                    <li>Ledin Noe Mendez Reyes - 202310060827</li>
+                    <li>Kensy Rosio Rodriguez - 202120120079</li>
+                </ol>
+            </div>
+
+            <div class="info-section">
+                <h2>Centro de Soporte</h2>
+                <p>Si experimenta errores o desea sugerir mejoras, puede contactar al equipo técnico UTH a través de:</p>
+                <p><strong>Email:</strong> <a href="mailto:soporte@uth.hn">soporte@uth.hn</a></p>
+                <p><strong>Teléfono:</strong> +504 8080-8080</p>
+                <p><strong>Horario:</strong> Lunes a Viernes, 8:00 a.m. – 5:00 p.m.</p>
+            </div>
+
+            <div class="button-group" style="justify-content: center;">
+                <h:commandButton value="Regresar al Menú" onclick="navigateAtm('menu'); return false;" styleClass="btn btn-secondary"/>
+            </div>
+
+        </div>
+
+        <div class="side-buttons-right">
+            <h:commandButton value="Salir>"
+                             onclick="navigateAtm('index'); return false;"
+                             styleClass="side-btn"/>
+        </div>
+
+    </div>
+</h:body>
+</html>

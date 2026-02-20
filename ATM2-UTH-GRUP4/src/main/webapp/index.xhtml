@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>ATM - BIENVENIDO</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/estilos/atm.css" />
+    <script type="text/javascript" src="#{request.contextPath}/estilos/atm.js"></script>
+</h:head>
+
+<h:body>
+    <div class="atm-screen-frame">
+
+        <div class="side-buttons-left">
+            <h:commandButton value=">Ayuda" onclick="navigateAtm('help'); return false;" styleClass="side-btn"/>
+        </div>
+
+        <div class="atm-container">
+            <h1>BIENVENIDO</h1>
+            <p>Por favor ingrese su número de cuenta y su PIN.</p>
+
+            <h:form id="loginForm">
+
+                <h:messages globalOnly="true" style="color: red; list-style: none; padding: 0;" />
+
+                <h:outputLabel for="cuenta" value="Número de cuenta"/>
+                <h:inputText id="cuenta" value="#{loginBean.numeroCuenta}" required="true" styleClass="input-field"/>
+                <h:message for="cuenta" style="color: red; display: block; font-size: 0.9em;" />
+
+                <h:outputLabel for="pin" value="PIN"/>
+                <h:inputSecret id="pin" value="#{loginBean.pin}" required="true" styleClass="input-field"/>
+                <h:message for="pin" style="color: red; display: block; font-size: 0.9em;" />
+
+                <p class="security-note">Por seguridad, los valores no se mostrarán.</p>
+
+                <div class="button-group">
+                    <h:commandButton value="Ingresar" action="#{loginBean.ingresar}" styleClass="btn btn-primary"/>
+                    <h:commandButton value="Cancelar" action="index" immediate="true" styleClass="btn btn-secondary"/>
+                </div>
+
+                <div class="message-area">
+                    <h:outputText value="#{loginBean.mensaje}"/>
+                </div>
+            </h:form>
+        </div>
+
+        <div class="side-buttons-right">
+            <h:commandButton value="Salir>" onclick="navigateAtm('salir'); return false;" styleClass="side-btn"/>
+        </div>
+
+    </div>
+</h:body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets"
+      lang="es">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Retiro • Cajero UTH</title>
+    <link rel="stylesheet" href="#{request.contextPath}/estilos/atm.css" />
+</h:head>
+
+<h:body>
+    <main class="contenedor">
+        <section class="atm-bisel">
+            <div class="atm-panel">
+
+                <!-- SOFT KEYS IZQUIERDA -->
+                <aside class="softcol">
+                    <h:link outcome="/WEB-INF/index.xhtml" value="Menú ›" styleClass="softkey"/>
+                    <h:link outcome="/WEB-INF/deposit.xhtml" value="Depósito ›" styleClass="softkey"/>
+                    <h:link outcome="/WEB-INF/help.xhtml" value="Ayuda ›" styleClass="softkey"/>
+                    <h:commandButton value="Salir ›" styleClass="softkey" action="#{loginBean.logout}"/>
+                </aside>
+
+                <!-- PANTALLA CENTRAL -->
+                <section class="pantalla">
+                    <h2 class="lcd-titulo">RETIRO</h2>
+                    <p class="lcd-sub">Ingrese su número de cuenta y el monto a retirar.</p>
+
+                    <h:form id="form-retiro" styleClass="formulario">
+                        <div class="campo">
+                            <label for="cuenta">Número de cuenta</label>
+                            <h:inputText id="cuenta" value="#{loginBean.cuenta}" styleClass="entrada" maxlength="6"/>
+                        </div>
+
+                        <div class="campo">
+                            <label for="monto">Monto a retirar (L)</label>
+                            <h:inputText id="monto" value="#{loginBean.pin}" styleClass="entrada" maxlength="5"/>
+                        </div>
+
+                        <div class="fila-botones">
+                            <h:commandButton value="Confirmar" styleClass="boton" action="confirmar"/>
+                            <h:commandButton value="Cancelar" styleClass="boton claro" type="reset"/>
+                        </div>
+
+                        <div class="alerta info mt-3">
+                            <h:outputText value="Ingrese los datos solicitados para procesar su retiro." />
+                        </div>
+                    </h:form>
+                </section>
+
+                <!-- SOFT KEYS DERECHA -->
+                <aside class="softcol">
+                    <h:link outcome="/WEB-INF/deposit.xhtml" value="Depósito ‹" styleClass="softkey"/>
+                    <h:link outcome="/WEB-INF/help.xhtml" value="Ayuda ‹" styleClass="softkey"/>
+                    <h:link outcome="/WEB-INF/index.xhtml" value="Menú ‹" styleClass="softkey"/>
+                    <h:commandButton value="Salir ‹" styleClass="softkey" action="#{loginBean.logout}"/>
+                </aside>
+            </div>
+
+            <div class="ranura"></div>
+        </section>
+    </main>
+
+    <script src="#{request.contextPath}/estilos/atm.js"></script>
+</h:body>
+</html>
